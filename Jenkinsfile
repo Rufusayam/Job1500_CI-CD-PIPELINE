@@ -96,28 +96,5 @@ exit(4)
                 }
             }
         }
-        stage('Continuous Delivery')
-        {
-            steps
-            {
-                script
-                {
-                    try
-                    {
-                       deploy adapters: [tomcat9(credentialsId: '0a2bd3e0-f7a7-42d4-81c9-a770f039ca67', path: '', url: 'http://172.31.8.82:8080')], contextPath: 'prodapp', war: '**/*.war' 
-                    }
-                    catch(Exception e5)
-                    {
-                        mail bcc: '', body: '''Hello Delivery Manager
-
-Continuoous Delivery into the production environment  did not work. please review code and advise.
-
-Thank you,
-Rufus''', cc: 'ayamnoeloa@gmail.com', from: '', replyTo: '', subject: 'Deployment into the prod server failed', to: 'rufuayam@gmail.com'
-exit(5)
-                    }
-                }
-            }
-        }
     }
 }
